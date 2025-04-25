@@ -1,0 +1,39 @@
+<h2>Your Tasks</h2>
+
+<form id="task-form">
+  <input type="text" name="title" placeholder="Task Title" required />
+  <textarea name="description" placeholder="Task Description"></textarea>
+  <input type="date" name="due_date" />
+  <select name="priority">
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+  <button type="submit">Add Task</button>
+</form>
+
+<hr />
+
+<ul id="task-list">
+  {{#each tasks}}
+    <li data-id="{{id}}">
+      <form class="edit-form">
+        <input type="checkbox" name="status" class="status-toggle" {{#ifCond status '==' 'completed'}}checked{{/ifCond}} />
+        <input type="text" name="title" value="{{title}}" required {{#ifCond status '==' 'completed'}}style="text-decoration: line-through;"{{/ifCond}} />
+        <textarea name="description" {{#ifCond status '==' 'completed'}}style="text-decoration: line-through;"{{/ifCond}}>{{description}}</textarea>
+        <input type="date" name="due_date" value="{{due_date}}" />
+        <select name="priority">
+          <option value="low" {{#ifCond priority '==' 'low'}}selected{{/ifCond}}>Low</option>
+          <option value="medium" {{#ifCond priority '==' 'medium'}}selected{{/ifCond}}>Medium</option>
+          <option value="high" {{#ifCond priority '==' 'high'}}selected{{/ifCond}}>High</option>
+        </select>
+        <button type="submit">💾 Save</button>
+        <button type="button" class="delete-btn">🗑️ Delete</button>
+      </form>
+    </li>
+  {{/each}}
+</ul>
+
+
+
+<script src="/js/task.js"></script>
